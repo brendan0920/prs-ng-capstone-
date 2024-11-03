@@ -1,0 +1,49 @@
+<div class="p-4">
+    <h1>{{ title }}</h1>
+    <!-- routerLInk example -->
+    <span class="page-title font-weight-bold font-italic" style="margin-right: 4px;">{{ title }}</span>
+    <a routerLink='/vendor-create'>
+        <img width='20' height='20' src='assets/add-icon.png' title='Add New'>
+    </a>
+    <table class="table table-striped table-hover">
+        <thead>
+            <th>ID</th>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Zip</th>
+            <th>Phone Number</th>
+            <th>Email</th>
+            <th>Action</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let v of vendors">
+                <td>{{ v.id }}</td>
+                <td>{{ v.code }}</td>
+                <td>{{ v.name }}</td>
+                <td>{{ v.address }}</td>
+                <td>{{ v.city }}</td>
+                <td>{{ v.state }}</td>
+                <td>{{ v.zip }}</td>
+                <td>{{ v.phoneNumber }}</td>
+                <td>{{ v.email }}</td>
+                <td>
+                    <a routerLink="/vendor-detail/{{ v.id }}">
+                        <img src="assets/details.png" width="20" height="20" title="Vendor Details"
+                            style="margin-right: 8px;">
+                    </a>
+                    <a routerLink="/vendor-list">
+                        <img width="20" height="20" src="assets/delete.jpg" title="Delete Vendor" (click)="delete(v.id)"
+                            style="margin-right: 8px;">
+                    </a>
+                    <a routerLink="/vendor-edit/{{ v.id }}">
+                        <img width="20" height="20" src="assets/pencil-icon.png" title="Edit Vendor"
+                            style="margin-right: 8px;">
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

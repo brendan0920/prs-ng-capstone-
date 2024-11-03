@@ -1,0 +1,42 @@
+<div class="p-4">
+    <h4>{{ title }}</h4>
+    <table>
+        <tr>
+            <td>Vendor ID:</td>
+            <td>
+                <input [(ngModel)]="newProduct.vendorId" type="number" />
+            </td>
+        </tr>
+        <tr>
+            <td>PartNumber:</td>
+            <td>
+                <input [(ngModel)]="newProduct.partNumber" type="text" />
+            </td>
+        </tr>
+        <tr>
+            <td>Name:</td>
+            <td>
+                <input [(ngModel)]="newProduct.name" type="text" />
+            </td>
+        </tr>
+        <tr>
+            <td>Price: </td>
+            <td>
+                <input [(ngModel)]="newProduct.price" type="number" />
+            </td>
+        </tr>
+        <tr>
+            <td>Unit:</td>
+            <td>
+                <input [(ngModel)]="newProduct.unit" type="text" />
+            </td>
+        </tr>
+        <tr>
+            <td>PhotoPath: </td>
+            <td>
+                <input [(ngModel)]="newProduct.photoPath" type="text" />
+            </td>
+        </tr>
+    </table>
+    <button (click)="addProduct()">Add Product</button>
+</div>

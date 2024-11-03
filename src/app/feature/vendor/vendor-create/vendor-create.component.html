@@ -1,0 +1,54 @@
+<div class="p-4">
+    <h4>{{ title }}</h4>
+    <table>
+        <tr>
+            <td>Code:</td>
+            <td>
+                <input [(ngModel)]="newVendor.code" type="text" />
+            </td>
+        </tr>
+        <tr>
+            <td>Name:</td>
+            <td>
+                <input [(ngModel)]="newVendor.name" type="text" />
+            </td>
+        </tr>
+        <tr>
+            <td>Address:</td>
+            <td>
+                <input [(ngModel)]="newVendor.address" type="text" />
+            </td>
+        </tr>
+        <tr>
+            <td>City: </td>
+            <td>
+                <input [(ngModel)]="newVendor.city" type="text" />
+            </td>
+        </tr>
+        <tr>
+            <td>State:</td>
+            <td>
+                <input [(ngModel)]="newVendor.state" type="text" />
+            </td>
+        </tr>
+        <tr>
+            <td>Zip:</td>
+            <td>
+                <input [(ngModel)]="newVendor.zip" type="text" />
+            </td>
+        </tr>
+        <tr>
+            <td>Phone Number:</td>
+            <td>
+                <input [(ngModel)]="newVendor.phoneNumber" type="text" />
+            </td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td>
+                <input [(ngModel)]="newVendor.email" type="text" />
+            </td>
+        </tr>
+    </table>
+    <button (click)="addVendor()">Add Vendor</button>
+</div>

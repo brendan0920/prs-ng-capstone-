@@ -1,0 +1,54 @@
+<div class="p-4">
+    <h4>{{ title }}</h4>
+    <table>
+        <tr>
+            <td>Username:</td>
+            <td>
+                <input [(ngModel)]="newUser.username" type="text" />
+            </td>
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td>
+                <input [(ngModel)]="newUser.password" type="text" />
+            </td>
+        </tr>
+        <tr>
+            <td>First Name:</td>
+            <td>
+                <input [(ngModel)]="newUser.firstName" type="text" />
+            </td>
+        </tr>
+        <tr>
+            <td>Last Name:</td>
+            <td>
+                <input [(ngModel)]="newUser.lastName" type="text" />
+            </td>
+        </tr>
+        <tr>
+            <td>Phone Number:</td>
+            <td>
+                <input [(ngModel)]="newUser.phoneNumber" type="text" />
+            </td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td>
+                <input [(ngModel)]="newUser.email" type="text" />
+            </td>
+        </tr>
+        <tr>
+            <td>Reviewer:</td>
+            <td> <select [(ngModel)]="newUser.reviewer" class="rounded">
+                    <option *ngFor="let reviewer of reviewers" [ngValue]="reviewer"> {{ reviewer }} </option>
+                </select> </td>
+        </tr>
+        <tr>
+            <td>Admin:</td>
+            <td> <select [(ngModel)]="newUser.admin" class="rounded">
+                    <option *ngFor="let admin of admins" [ngValue]="admin"> {{ admin }} </option>
+                </select> </td>
+        </tr>
+    </table>
+    <button (click)="addUser()">Add User</button>
+</div>

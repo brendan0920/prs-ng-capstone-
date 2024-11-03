@@ -1,0 +1,45 @@
+<div class="p-4">
+    <h1>{{ title }}</h1>
+    <!-- routerLInk example -->
+    <span class="page-title font-weight-bold font-italic" style="margin-right: 4px;">{{ title }}</span>
+    <a routerLink='/product-create'>
+        <img width='20' height='20' src='assets/add-icon.png' title='Add New'>
+    </a>
+    <table class="table table-striped table-hover">
+        <thead>
+            <th>ID</th>
+            <th>Vendor ID</th>
+            <th>PartNumber</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Unit</th>
+            <th>PhotoPath</th>
+            <th>Action</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let p of products">
+                <td>{{ p.id }}</td>
+                <td>{{ p.vendorId }}</td>
+                <td>{{ p.partNumber }}</td>
+                <td>{{ p.name }}</td>
+                <td>${{ p.price }}</td>
+                <td>{{ p.unit }}</td>
+                <td>{{ p.photoPath }}</td>
+                <td>
+                    <a routerLink="/product-detail/{{ p.id }}">
+                        <img src="assets/details.png" width="20" height="20" title="Product Details"
+                            style="margin-right: 8px;">
+                    </a>
+                    <a routerLink="/product-list">
+                        <img width="20" height="20" src="assets/delete.jpg" title="Delete Product"
+                            (click)="delete(p.id)" style="margin-right: 8px;">
+                    </a>
+                    <a routerLink="/product-edit/{{ p.id }}">
+                        <img width="20" height="20" src="assets/pencil-icon.png" title="Edit Product"
+                            style="margin-right: 8px;">
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
