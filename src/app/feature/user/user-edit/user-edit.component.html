@@ -1,57 +1,61 @@
-<span class='component-title'>{{title}}</span>
-<p *ngIf='!user'>Loading...</p>
-<div *ngIf='user'>
-    <main class="single">
-        <table class="table table-sm">
-            <tr>
-                <td>Username:</td>
-                <td>
-                    <input [(ngModel)]="user.username" type="text" />
-                </td>
-            </tr>
-            <tr>
-                <td>Password:</td>
-                <td>
-                    <input [(ngModel)]="user.password" type="text" />
-                </td>
-            </tr>
-            <tr>
-                <td>First Name:</td>
-                <td>
-                    <input [(ngModel)]="user.firstName" type="text" />
-                </td>
-            </tr>
-            <tr>
-                <td>Last Name:</td>
-                <td>
-                    <input [(ngModel)]="user.lastName" type="text" />
-                </td>
-            </tr>
-            <tr>
-                <td>Phone Number:</td>
-                <td>
-                    <input [(ngModel)]="user.phoneNumber" type="text" />
-                </td>
-            </tr>
-            <tr>
-                <td>Email:</td>
-                <td>
-                    <input [(ngModel)]="user.email" type="text" />
-                </td>
-            </tr>
-            <tr>
-                <td>Reviewer:</td>
-                <td> <select [(ngModel)]="user.reviewer" class="rounded">
-                        <option *ngFor="let reviewer of reviewers" [ngValue]="reviewer"> {{ reviewer }} </option>
-                    </select> </td>
-            </tr>
-            <tr>
-                <td>Admin:</td>
-                <td> <select [(ngModel)]="user.admin" class="rounded">
-                        <option *ngFor="let admin of admins" [ngValue]="admin"> {{ admin }} </option>
-                    </select> </td>
-            </tr>
-        </table>
-    </main>
-    <span><button (click)="save()" class="btn btn-sm btn-primary">Save</button></span>
+<app-menu></app-menu>
+<div class="p-4">
+    <span class='component-title'>
+        <h4>{{title}}</h4>
+    </span>
+    <div *ngIf='user'>
+        <main class="single">
+            <table class="table table-sm">
+                <tr>
+                    <td>Username:</td>
+                    <td>
+                        <input [(ngModel)]="user.username" type="text" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Password:</td>
+                    <td>
+                        <input [(ngModel)]="user.password" type="text" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>First Name:</td>
+                    <td>
+                        <input [(ngModel)]="user.firstName" type="text" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Last Name:</td>
+                    <td>
+                        <input [(ngModel)]="user.lastName" type="text" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Phone Number:</td>
+                    <td>
+                        <input [(ngModel)]="user.phoneNumber" type="text" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td>
+                        <input [(ngModel)]="user.email" type="text" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Reviewer:</td>
+                    <td> <select [(ngModel)]="user.reviewer" class="rounded">
+                            <option *ngFor="let reviewer of reviewers" [ngValue]="reviewer"> {{ reviewer }} </option>
+                        </select> </td>
+                </tr>
+                <tr>
+                    <td>Admin:</td>
+                    <td> <select [(ngModel)]="user.admin" class="rounded">
+                            <option *ngFor="let admin of admins" [ngValue]="admin"> {{ admin }} </option>
+                        </select> </td>
+                </tr>
+            </table>
+        </main>
+        <span><button (click)="save()" class="btn btn-sm btn-primary">Save</button></span>
+    </div>
 </div>

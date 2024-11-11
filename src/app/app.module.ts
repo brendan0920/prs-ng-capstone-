@@ -23,7 +23,14 @@ import { RequestListComponent } from './feature/request/request-list/request-lis
 import { RequestCreateComponent } from './feature/request/request-create/request-create.component';
 import { RequestEditComponent } from './feature/request/request-edit/request-edit.component';
 import { RequestDetailComponent } from './feature/request/request-detail/request-detail.component';
-import { LineItemComponent } from './feature/line-item/line-item.component';
+import { UserLoginComponent } from './feature/user/user-login/user-login/user-login.component';
+import { LineItemListComponent } from './feature/lineItem/line-item-list/line-item-list.component';
+import { LineItemCreateComponent } from './feature/lineItem/line-item-create/line-item-create.component';
+import { LineItemEditComponent } from './feature/lineItem/line-item-edit/line-item-edit.component';
+import { RequestLineItemComponent } from './feature/request/request-line-item/request-line-item.component';
+import { RequestReviewComponent } from './feature/request/request-review/request-review.component';
+import { RequestApproveRejectComponent } from './feature/request/request-approve-reject/request-approve-reject.component';
+
 
 
 @NgModule({
@@ -47,7 +54,13 @@ import { LineItemComponent } from './feature/line-item/line-item.component';
     RequestCreateComponent,
     RequestEditComponent,
     RequestDetailComponent,
-    LineItemComponent
+    UserLoginComponent,
+    LineItemListComponent,
+    LineItemCreateComponent,
+    LineItemEditComponent,
+    RequestLineItemComponent,
+    RequestReviewComponent,
+    RequestApproveRejectComponent
   ],
   imports: [
     BrowserModule,

@@ -1,50 +1,59 @@
-<div *ngIf="user" class="component">
-    <section class="heading">
-        <span class="page-title font-weight-bold font-italic">{{title}}</span>
-        <span> | <a routerLink="/user-list">Return to List</a></span>
-    </section>
-    <main class="single">
-        <table class="table table-sm">
-            <tr>
-                <td>ID</td>
-                <td>{{user.id}}</td>
-            </tr>
-            <tr>
-                <td>Username:</td>
-                <td><input [(ngModel)]="user.username" class="rounded" type="text" disabled></td>
-            </tr>
-            <tr>
-                <td>Password:</td>
-                <td><input [(ngModel)]="user.password" class="rounded" type="text" disabled></td>
-            </tr>
-            <tr>
-                <td>Frist Name:</td>
-                <td><input [(ngModel)]="user.firstName" class="rounded" type="text" disabled></td>
-            </tr>
-            <tr>
-                <td>Last Name:</td>
-                <td><input [(ngModel)]="user.lastName" class="rounded" type="text" disabled></td>
-            </tr>
-            <tr>
-                <td>Phone Number:</td>
-                <td><input [(ngModel)]="user.phoneNumber" class="rounded" type="text" disabled></td>
-            </tr>
-            <tr>
-                <td>Email:</td>
-                <td><input [(ngModel)]="user.email" class="rounded" type="text" disabled></td>
-            </tr>
-            <tr>
-                <td>Reviewer:</td>
-                <td><input [(ngModel)]="user.reviewer" class="rounded" type="text" disabled></td>
-            </tr>
-            <tr>
-                <td>Admin:</td>
-                <td><input [(ngModel)]="user.admin" class="rounded" type="text" disabled></td>
-            </tr>
-        </table>
-    </main>
-    <span>
-        <span><a routerLink="/user-edit/{{user.id}}" class="btn btn-sm btn-warning">Edit</a></span>
-        <span> | <button (click)="delete()" class="btn btn-sm btn-danger">Delete</button></span>
-    </span>
+<app-menu></app-menu>
+<div class="p-4">
+    <div *ngIf="user" class="component">
+        <section class="heading">
+            <h4>
+                <span class="page-title font-weight-bold font-italic">{{title}}</span>
+                <span> | <a routerLink="/user-list">Return to List</a>
+                    <h6 style="float: right; width: 70%; text-align: right; margin-right: 50px;">
+                        <strong><em>Hello, {{ welcomeName }}!</em></strong>
+                    </h6>
+                </span>
+            </h4>
+        </section>
+        <main class="single">
+            <table class="table table-sm">
+                <tr>
+                    <td>ID</td>
+                    <td>{{user.id}}</td>
+                </tr>
+                <tr>
+                    <td>Username:</td>
+                    <td><input [(ngModel)]="user.username" class="rounded" type="text" disabled></td>
+                </tr>
+                <tr>
+                    <td>Password:</td>
+                    <td><input [(ngModel)]="user.password" class="rounded" type="text" disabled></td>
+                </tr>
+                <tr>
+                    <td>Frist Name:</td>
+                    <td><input [(ngModel)]="user.firstName" class="rounded" type="text" disabled></td>
+                </tr>
+                <tr>
+                    <td>Last Name:</td>
+                    <td><input [(ngModel)]="user.lastName" class="rounded" type="text" disabled></td>
+                </tr>
+                <tr>
+                    <td>Phone Number:</td>
+                    <td><input [(ngModel)]="user.phoneNumber" class="rounded" type="text" disabled></td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td><input [(ngModel)]="user.email" class="rounded" type="text" disabled></td>
+                </tr>
+                <tr>
+                    <td>Reviewer:</td>
+                    <td><input [(ngModel)]="user.reviewer" class="rounded" type="text" disabled></td>
+                </tr>
+                <tr>
+                    <td>Admin:</td>
+                    <td><input [(ngModel)]="user.admin" class="rounded" type="text" disabled></td>
+                </tr>
+            </table>
+        </main>
+        <span>
+            <span><a routerLink="/user-edit/{{user.id}}" class="btn btn-sm btn-warning">Edit</a></span>
+            <span> | <button (click)="delete()" class="btn btn-sm btn-danger">Delete</button></span>
+        </span>
+    </div>
 </div>

@@ -1,0 +1,37 @@
+<app-menu></app-menu>
+<div class="p-4">
+    <section class="heading">
+        <span class="component-title">
+            <h6>
+                [<strong><em>{{ title }}</em></strong>] -
+                <span *ngFor="let lineItem of lineItems">
+                    <strong>PR ID:{{ lineItem.product.id }}</strong>
+                </span>
+                <a routerLink="/request-list">Return to List</a>
+                <span style="float: right; width: 70%; text-align: right; margin-right: 50px;">
+                    <strong><em>Hello, {{ welcomeName }}!</em></strong>
+                </span>
+            </h6>
+        </span>
+    </section>
+    <table class="table table-sm table-striped">
+        <tr>
+            <td>Product:</td>
+            <td> <select [(ngModel)]="newLineItem.product" class="rounded">
+                    <option *ngFor="let p of products" [ngValue]="p">
+                        {{ p.name }} | {{ p.vendor.name }}
+                    </option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Quantity</td>
+            <td>
+                <input [(ngModel)]="newLineItem.quantity" calss="rounded" type="number" />
+            </td>
+        </tr>
+    </table>
+    <a routerLink="/lines-for-req/{{ requestId }}">
+        <button (click)="addLineItem()">Add Line Item</button>
+    </a>
+</div>

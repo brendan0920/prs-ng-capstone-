@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../model/user';
+import { UserLogin } from '../model/user-login';
 
 const URL = "http://localhost:5041/api/Users";
 
@@ -34,5 +35,9 @@ export class UserService {
   // edit(user: User) method
   edit(user: User): Observable<User> {
     return this.http.put(URL + '/' + user.id, user) as Observable<User>;
+  }
+
+  login(userLogin: UserLogin): Observable<User> {
+    return this.http.post(URL + "/login", userLogin) as Observable<User>;
   }
 }

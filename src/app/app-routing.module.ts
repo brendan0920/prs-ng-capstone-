@@ -13,6 +13,17 @@ import { ProductListComponent } from './feature/product/product-list/product-lis
 import { ProductCreateComponent } from './feature/product/product-create/product-create.component';
 import { ProductDetailComponent } from './feature/product/product-detail/product-detail.component';
 import { ProductEditComponent } from './feature/product/product-edit/product-edit.component';
+import { RequestListComponent } from './feature/request/request-list/request-list.component';
+import { RequestCreateComponent } from './feature/request/request-create/request-create.component';
+import { RequestDetailComponent } from './feature/request/request-detail/request-detail.component';
+import { RequestEditComponent } from './feature/request/request-edit/request-edit.component';
+import { UserLoginComponent } from './feature/user/user-login/user-login/user-login.component';
+import { RequestLineItemComponent } from './feature/request/request-line-item/request-line-item.component';
+import { LineItemListComponent } from './feature/lineItem/line-item-list/line-item-list.component';
+import { LineItemCreateComponent } from './feature/lineItem/line-item-create/line-item-create.component';
+import { LineItemEditComponent } from './feature/lineItem/line-item-edit/line-item-edit.component';
+import { RequestReviewComponent } from './feature/request/request-review/request-review.component';
+import { RequestApproveRejectComponent } from './feature/request/request-approve-reject/request-approve-reject.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/user-list', pathMatch: 'full' },
@@ -28,6 +39,17 @@ const routes: Routes = [
   { path: 'product-create', component: ProductCreateComponent },
   { path: 'product-detail/:id', component: ProductDetailComponent },
   { path: 'product-edit/:id', component: ProductEditComponent },
+  { path: 'request-list', component: RequestListComponent },
+  { path: 'request-create', component: RequestCreateComponent },
+  { path: 'request-detail/:id', component: RequestDetailComponent },
+  { path: 'request-edit/:id', component: RequestEditComponent },
+  { path: 'list-review/:userId', component: RequestReviewComponent },
+  { path: 'request-approve-reject', component: RequestApproveRejectComponent },
+  { path: 'lines-for-req/:requestId', component: RequestLineItemComponent },
+  { path: 'lineItem-list', component: LineItemListComponent },
+  { path: 'lineItem-create/:requestId', component: LineItemCreateComponent },
+  { path: 'lineItem-edit/:id', component: LineItemEditComponent },
+  { path: 'user-login', component: UserLoginComponent },
   { path: '**', component: NotFoundComponent }
 ];
 

@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Vendor } from '../../../model/vendor';
 import { VendorService } from '../../../service/vendor.service';
+import { SystemService } from '../../../service/system.service';
 
 @Component({
   selector: 'app-vendor-list',
@@ -13,10 +14,12 @@ export class VendorListComponent implements OnInit, OnDestroy {
 
   vendors: Vendor[] | undefined;
   subscription!: Subscription;
+  welcomeName: string = "";
 
-  constructor(private vendorSvc: VendorService) { }
+  constructor(private vendorSvc: VendorService, private sysSvc: SystemService) { }
 
   ngOnInit(): void {
+    this.welcomeName = this.sysSvc.loggedInUser.firstName;
     this.subscription = this.vendorSvc.list().subscribe(
       (resp) => {
         this.vendors = resp;

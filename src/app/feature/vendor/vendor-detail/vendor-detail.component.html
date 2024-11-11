@@ -1,1 +1,58 @@
-<p>vendor-detail works!</p>
+<app-menu></app-menu>
+<div class="p-4">
+    <div *ngIf="vendor" class="component">
+        <section class="heading">
+            <h4>
+                <span class="page-title font-weight-bold font-italic">{{title}}</span>
+                <span> | <a routerLink="/vendor-list">Return to List</a></span>
+            </h4>
+            <a style="float: right; width: 70%; text-align: right; margin-right: 50px;">
+                <strong><em>Hello, {{ welcomeName }}!</em></strong>
+            </a>
+        </section>
+        <main class="single">
+            <table class="table table-sm">
+                <tr>
+                    <td>ID</td>
+                    <td>{{vendor.id}}</td>
+                </tr>
+                <tr>
+                    <td>Code:</td>
+                    <td><input [(ngModel)]="vendor.code" class="rounded" type="text" disabled></td>
+                </tr>
+                <tr>
+                    <td>Name:</td>
+                    <td><input [(ngModel)]="vendor.name" class="rounded" type="text" disabled></td>
+                </tr>
+                <tr>
+                    <td>Address:</td>
+                    <td><input [(ngModel)]="vendor.address" class="rounded" type="text" disabled></td>
+                </tr>
+                <tr>
+                    <td>City:</td>
+                    <td><input [(ngModel)]="vendor.city" class="rounded" type="text" disabled></td>
+                </tr>
+                <tr>
+                    <td>State:</td>
+                    <td><input [(ngModel)]="vendor.state" class="rounded" type="text" disabled></td>
+                </tr>
+                <tr>
+                    <td>Zip:</td>
+                    <td><input [(ngModel)]="vendor.zip" class="rounded" type="text" disabled></td>
+                </tr>
+                <tr>
+                    <td>Phone Number:</td>
+                    <td><input [(ngModel)]="vendor.phoneNumber" class="rounded" type="text" disabled></td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td><input [(ngModel)]="vendor.email" class="rounded" type="text" disabled></td>
+                </tr>
+            </table>
+        </main>
+        <span>
+            <span><a routerLink="/vendor-edit/{{vendor.id}}" class="btn btn-sm btn-warning">Edit</a></span>
+            <span> | <button (click)="delete()" class="btn btn-sm btn-danger">Delete</button></span>
+        </span>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+<app-menu></app-menu>
+<div class="p-4">
+    <section class="heading">
+        <span class="component-title">
+            <h6>[<strong><em>{{ title }}</em></strong>]
+                <span style="float: right; width: 70%; text-align: right; margin-right: 50px;">
+                    <strong><em>Hello, {{ welcomeName }}!</em></strong>
+                </span>
+            </h6>
+        </span>
+    </section>
+    <table class="table table-striped table-hover">
+        <thead>
+            <th>User</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Total</th>
+            <th>Submitted Date</th>
+            <th>Action</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let r of requests">
+                <td>{{ r.user.firstName + " " + r.user.lastName }}</td>
+                <td>{{ r.description }}</td>
+                <td>{{ r.status }}</td>
+                <td>{{ r.total }}</td>
+                <td>{{ r.submittedDate }}</td>
+                <td>
+                    <a routerLink="/request-approve-reject">
+                        <img width="20" height="20" src="assets/lines.png" title="Review" style="margin-right: 8px;">
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

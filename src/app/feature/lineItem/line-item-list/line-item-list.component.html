@@ -1,0 +1,39 @@
+<app-menu></app-menu>
+<div class="p-4">
+    <h1>{{ title }}</h1>
+    <!-- routerLInk example -->
+    <span class="page-title font-weight-bold font-italic">{{ title }}</span>
+    <a routerLink='/credit-create'>
+        <img width='20' height='20' src='assets/add-icon.png' title='Add New'>
+    </a>
+    <table class="table table-striped table-hover">
+        <thead>
+            <th>ID</th>
+            <th>Request</th>
+            <th>Product</th>
+            <th>Quantity</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let li of lineItems">
+                <td>{{ li.id }}</td>
+                <td>{{ li.request.id }}</td>
+                <td>{{ li.product.id }}</td>
+                <td>{{ li.quantity }}</td>
+                <td>
+                    <a routerLink="/credit-detail/{{ li.id }}">
+                        <img src="assets/details.png" width="20" height="20" title="Actor Details"
+                            style="margin-right: 8px;">
+                    </a>
+                    <a routerLink="/credit-list">
+                        <img width="20" height="20" src="assets/delete.jpg" title="Delete Actor" (click)="delete(li.id)"
+                            style="margin-right: 8px;">
+                    </a>
+                    <a routerLink="/credit-edit/{{ li.id }}">
+                        <img width="20" height="20" src="assets/pencil-icon.png" title="Edit Actor"
+                            style="margin-right: 8px;">
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

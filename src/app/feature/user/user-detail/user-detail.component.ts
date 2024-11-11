@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { User } from '../../../model/user';
 import { UserService } from '../../../service/user.service';
+import { SystemService } from '../../../service/system.service';
 
 @Component({
   selector: 'app-user-detail',
@@ -14,10 +15,17 @@ export class UserDetailComponent implements OnInit, OnDestroy {
   userId!: number;
   user!: User;
   subscription!: Subscription;
+  welcomeName: string = "";
 
-  constructor(private userSvc: UserService, private router: Router, private actRoute: ActivatedRoute) { }
+  constructor(
+    private userSvc: UserService,
+    private router: Router,
+    private actRoute: ActivatedRoute,
+    private sysSvc: SystemService
+  ) { }
 
   ngOnInit(): void {
+    this.welcomeName = this.sysSvc.loggedInUser.firstName;
     this.actRoute.params.subscribe((parms) => {
       this.userId = parms['id'];
     });
@@ -33,15 +41,15 @@ export class UserDetailComponent implements OnInit, OnDestroy {
   }
 
   delete() {
-    this.userSvc.delete(this.userId).subscribe(
-      resp => {
+    this.userSvc.delete(this.userId).subscribe({
+      next: (resp) => {
         this.user = resp as User;
         this.router.navigateByUrl('/user-list');
       },
-      err => {
+      error: (err) => {
         console.log(err);
       }
-    );
+    });
   }
 
   ngOnDestroy(): void {

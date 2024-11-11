@@ -33,15 +33,15 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   }
 
   delete() {
-    this.productSvc.delete(this.productId).subscribe(
-      resp => {
+    this.subscription = this.productSvc.delete(this.productId).subscribe({
+      next: (resp) => {
         this.product = resp as Product;
         this.router.navigateByUrl('/product-list');
       },
-      err => {
+      error: (err) => {
         console.log(err);
       }
-    );
+    });
   }
 
   ngOnDestroy(): void {

@@ -1,6 +1,9 @@
+import { User } from "./user";
+
 export class Request {
     id: number;
     userId: number;
+    user: User;
     requestNumber: string;
     description: string;
     justification: string;
@@ -11,8 +14,10 @@ export class Request {
     submittedDate: Date;
     reasonForRejection: string;
 
-    constructor(id: number = 0,
+    constructor(
+        id: number = 0,
         userId: number = 0,
+        user: User = new User(),
         requestNumber: string = "",
         description: string = "",
         justification: string = "",
@@ -24,6 +29,7 @@ export class Request {
         reasonForRejection: string = "") {
         this.id = id;
         this.userId = userId;
+        this.user = user;
         this.requestNumber = requestNumber;
         this.description = description;
         this.justification = justification;

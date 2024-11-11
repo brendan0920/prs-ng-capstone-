@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Vendor } from '../../../model/vendor';
 import { VendorService } from '../../../service/vendor.service';
+import { SystemService } from '../../../service/system.service';
 
 @Component({
   selector: 'app-vendor-edit',
@@ -14,11 +15,17 @@ export class VendorEditComponent implements OnInit, OnDestroy {
   vendorId!: number;
   vendor!: Vendor;
   subscription!: Subscription
-  ratings: string[] = ["G", "PG", "PG13", "R", "NC-13"];
+  welcomeName: string = "";
 
-  constructor(private vendorSvc: VendorService, private router: Router, private actRoute: ActivatedRoute) { }
+  constructor(
+    private vendorSvc: VendorService,
+    private router: Router,
+    private sysSvc: SystemService,
+    private actRoute: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
+    this.welcomeName = this.sysSvc.loggedInUser.firstName;
     // get id from the url
     this.actRoute.params.subscribe(parms => {
       this.vendorId = parms["id"]
@@ -36,18 +43,18 @@ export class VendorEditComponent implements OnInit, OnDestroy {
   }
 
   save() {
-    this.vendorSvc.edit(this.vendor).subscribe(
-      resp => {
+    this.vendorSvc.edit(this.vendor).subscribe({
+      next: (resp) => {
         this.vendor = resp as Vendor;
         this.router.navigateByUrl("/vendor-list");
       },
-      err => { console.log(err); }
-    );
+      error: (err) => {
+        console.log(err);
+      }
+    });
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-
-
 }

@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Product } from '../../../model/product';
 import { ProductService } from '../../../service/product.service';
+import { SystemService } from '../../../service/system.service';
 
 @Component({
   selector: 'app-product-list',
@@ -14,9 +15,13 @@ export class ProductListComponent implements OnInit, OnDestroy {
   products: Product[] | undefined;
   subscription!: Subscription;
 
-  constructor(private productSvc: ProductService) { }
+  welcomeName: string = "";
+
+  constructor(private productSvc: ProductService, private sysSvc: SystemService) { }
 
   ngOnInit(): void {
+    this.welcomeName = this.sysSvc.loggedInUser.firstName;
+
     this.subscription = this.productSvc.list().subscribe(
       (resp) => {
         this.products = resp;

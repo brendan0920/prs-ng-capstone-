@@ -1,0 +1,76 @@
+<app-menu></app-menu>
+<div class="p-4">
+    <section class="heading">
+        <span class="component-title">
+            <h6>[<strong><em>{{ title }}</em></strong>] |
+                <a routerLink="/request-list">Return to List</a>
+                <span style="float: right; width: 70%; text-align: right; margin-right: 50px;">
+                    <strong><em>Hello, {{ welcomeName }}!</em></strong>
+                </span>
+            </h6>
+        </span>
+    </section>
+    <div *ngIf="request">
+        <table class="table table-sm table-striped">
+            <thead>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Total</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ welcomeName}}</td>
+                    <td>{{ request.description}}</td>
+                    <td>{{ request.status}}</td>
+                    <td>{{ request.total | currency}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <section class="heading">
+        <span class="page-title font-weight-bold font-italic">
+            <h6>[<strong><em>Line Items</em></strong>]
+                <!-- <a routerLink='/lineItem-create'> -->
+                <a [routerLink]="['/lineItem-create', requestId]">
+                    <img width='20' height='20' src='assets/add-icon.png' title='Add New'>
+                </a>
+            </h6>
+        </span>
+
+    </section>
+    <div *ngIf="lineItems">
+        <table class="table table-sm table-striped">
+            <thead>
+                <th>Vendor</th>
+                <th>Prodcut</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Line Total</th>
+                <th>Action</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let lineItem of lineItems">
+                    <td>{{ lineItem.product.vendor.name}}</td>
+                    <td>{{ lineItem.product.name}}</td>
+                    <td>{{ lineItem.quantity }}</td>
+                    <td>{{ lineItem.product.price | currency }}</td>
+                    <td>{{ calcLineTotal(lineItem) | currency }}</td>
+                    <td>
+                        <a routerLink="/lineItem-edit/{{ lineItem.id }}">
+                            <img width="20" height="20" src="assets/pencil-icon.png" title="Edit LineItem"
+                                style="margin-right: 8px;">
+                        </a>
+                        <a routerLink="/lines-for-req/{{ requestId }}">
+                            <img width="20" height="20" src="assets/delete.jpg" title="Delete LineItem"
+                                (click)="delete(lineItem.id)" style="margin-right: 8px;">
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <a routerLink="/request-list">
+            <button (click)="submitReview()" class="btn btn-sm btn-primary">Submit</button>
+        </a>
+    </div>
+</div>
