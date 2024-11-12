@@ -14,7 +14,9 @@ import { LineItemService } from '../../../service/line-item.service';
 })
 export class RequestApproveRejectComponent implements OnInit, OnDestroy {
   title: string = "Purchase Request Approve/Reject";
+  reasonForReject: string = "";
 
+  requests: Request[] = [];
   request!: Request;
   requestId!: number;
   lineItems: LineItem[] = [];
@@ -33,18 +35,14 @@ export class RequestApproveRejectComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.welcomeName = this.sysSvc.loggedInUser.firstName;
 
-    // get requestId from URL
+    // get request id from url
     this.subscription = this.actRoute.params.subscribe({
       next: (parms) => {
         this.requestId = parms['requestId'];
-
-        this.getRequestDetail();
       }
     });
-  }
 
-  getRequestDetail(): void {
-    // get the request for requestId
+    // get request for requesId
     this.subscription = this.requestSvc.getById(this.requestId).subscribe({
       next: (resp) => {
         console.log("Request response:", resp);
@@ -55,7 +53,7 @@ export class RequestApproveRejectComponent implements OnInit, OnDestroy {
       }
     });
 
-    // get lineItems for the request
+    // get lineitem for requestId
     this.subscription = this.lineItemSvc.getByReqId(this.requestId).subscribe({
       next: (resp) => {
         console.log("Line items response:", resp);
@@ -65,28 +63,91 @@ export class RequestApproveRejectComponent implements OnInit, OnDestroy {
         console.error("Request-LineItems: Error getting lineItems for requestId: ", err + this.requestId)
       }
     });
+
   }
+
+
+
+
+  approve(): void {
+
+
+    this.subscription = this.requestSvc.approve(this.requestId).subscribe({
+      next: (resp) => {
+        // get request for requesId
+        this.subscription = this.requestSvc.getById(this.requestId).subscribe({
+          next: (resp) => {
+            console.log("Request response:", resp);
+            this.request = resp;
+          },
+          error: (err) => {
+            console.error("Request-LineItems: Error getting request for id: ", err + this.requestId);
+          }
+        });
+
+        // get lineitem for requestId
+        this.subscription = this.lineItemSvc.getByReqId(this.requestId).subscribe({
+          next: (resp) => {
+            console.log("Line items response:", resp);
+            this.lineItems = resp;
+          },
+          error: (err) => {
+            console.error("Request-LineItems: Error getting lineItems for requestId: ", err + this.requestId)
+          }
+        });
+
+
+
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
+
+  reject(): void {
+    this.request.reasonForRejection = this.reasonForReject;
+
+    this.subscription = this.requestSvc.reject(this.request).subscribe({
+      next: (resp) => {
+        // get request for requesId
+        this.subscription = this.requestSvc.getById(this.requestId).subscribe({
+          next: (resp) => {
+            console.log("Request response:", resp);
+            this.request = resp;
+          },
+          error: (err) => {
+            console.error("Request-LineItems: Error getting request for id: ", err + this.requestId);
+          }
+        });
+
+        // get lineitem for requestId
+        this.subscription = this.lineItemSvc.getByReqId(this.requestId).subscribe({
+          next: (resp) => {
+            console.log("Line items response:", resp);
+            this.lineItems = resp;
+          },
+          error: (err) => {
+            console.error("Request-LineItems: Error getting lineItems for requestId: ", err + this.requestId)
+          }
+        });
+
+        this.reasonForReject = "";
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
+
 
   calcLineTotal(lineItem: LineItem): number {
     return lineItem.product.price * lineItem.quantity;
   }
 
-  submitReview(): void {
-    this.subscription = this.requestSvc.submitReview(this.requestId).subscribe({
-      next: (resp) => {
-        console.log("Review submmited!", resp);
-        this.getRequestDetail();
-        this.router.navigateByUrl("request-list");
-      },
-      error: (err) => {
-        console.error("Error submitting review:", err);
-      }
-    });
-
-  }
-
-
   ngOnDestroy(): void {
     this.subscription?.unsubscribe();
   }
+
+
 }

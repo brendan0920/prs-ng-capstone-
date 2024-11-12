@@ -3,7 +3,7 @@
     <section class="heading">
         <span class="component-title">
             <h6>[<strong><em>{{ title }}</em></strong>] |
-                <a routerLink="/request-list">Return to List</a>
+                <!-- <a routerLink="/request-list">Return to List</a> -->
                 <span style="float: right; width: 70%; text-align: right; margin-right: 50px;">
                     <strong><em>Hello, {{ welcomeName }}!</em></strong>
                 </span>
@@ -13,14 +13,14 @@
     <div *ngIf="request">
         <table class="table table-sm table-striped">
             <thead>
-                <th>Name</th>
+                <th>ID</th>
                 <th>Description</th>
                 <th>Status</th>
                 <th>Total</th>
             </thead>
             <tbody>
                 <tr>
-                    <td>{{ welcomeName}}</td>
+                    <td>{{ request.id}}</td>
                     <td>{{ request.description}}</td>
                     <td>{{ request.status}}</td>
                     <td>{{ request.total}}</td>
@@ -31,31 +31,34 @@
     <div *ngIf="lineItems">
         <table class="table table-sm table-striped">
             <thead>
-                <th>Vendor</th>
+                <th>ID</th>
                 <th>Prodcut</th>
                 <th>Quantity</th>
                 <th>Price</th>
                 <th>Line Total</th>
-
             </thead>
             <tbody>
                 <tr *ngFor="let lineItem of lineItems">
-                    <td>{{ lineItem.product.vendor.name}}</td>
+                    <td>{{ lineItem.product.vendor.id}}</td>
                     <td>{{ lineItem.product.name}}</td>
                     <td>{{ lineItem.quantity }}</td>
                     <td>{{ lineItem.product.price | currency }}</td>
-                    <td>{{ calcLineTotal(lineItem) | currency }}</td>
+                    <td>{{ lineItem.request.total | currency }}</td>
                 </tr>
             </tbody>
         </table>
     </div>
     <section>
         <a routerLink="/request-list">
-            <button (click)="submitReview()" class="btn btn-sm btn-primary">Approve</button>
+            <button (click)="approve()" class="btn btn-sm btn-primary">Approve</button>
         </a>
-
+        <div>
+            <label for="reasonForReject">Reason for rejection:</label>
+            <textarea id="reasonForReject" [(ngModel)]="reasonForReject" class="form-control"
+                style="width: 200px; height: 40px;"></textarea>
+        </div>
         <a routerLink="/request-list">
-            <button (click)="submitReview()" class="btn btn-sm btn-danger">Reject</button>
+            <button (click)="reject()" class="btn btn-sm btn-danger">Reject</button>
         </a>
     </section>
 </div>

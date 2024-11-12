@@ -43,7 +43,5 @@ export class LineItemService {
     return this.http.get(URL + "/lines-for-req/" + requestId) as Observable<LineItem[]>;
   }
 
-  recalcReqTotal(requestId: number): Observable<Request> {
-    return this.http.get("http://localhost:5041/api/Requests/" + requestId) as Observable<Request>;
-  }
+
 }

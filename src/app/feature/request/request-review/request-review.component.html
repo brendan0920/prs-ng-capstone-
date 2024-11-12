@@ -23,10 +23,10 @@
                 <td>{{ r.user.firstName + " " + r.user.lastName }}</td>
                 <td>{{ r.description }}</td>
                 <td>{{ r.status }}</td>
-                <td>{{ r.total }}</td>
+                <td>{{ r.total | currency}}</td>
                 <td>{{ r.submittedDate }}</td>
                 <td>
-                    <a routerLink="/request-approve-reject">
+                    <a routerLink="/request-approve-reject/ {{r.id}}">
                         <img width="20" height="20" src="assets/lines.png" title="Review" style="margin-right: 8px;">
                     </a>
                 </td>

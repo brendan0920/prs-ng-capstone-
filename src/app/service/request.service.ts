@@ -23,8 +23,8 @@ export class RequestService {
   }
 
   // delete(id: number) method
-  delete(id: number): Observable<any> {
-    return this.http.delete(URL + "/" + id);
+  delete(id: number): Observable<Request> {
+    return this.http.delete(URL + "/" + id) as Observable<Request>;
   }
 
   // getById(id: number) method
@@ -37,12 +37,20 @@ export class RequestService {
     return this.http.put(URL + "/" + request.id, request) as Observable<Request>;
   }
 
-  submitReview(requestId: number): Observable<Request> {
-    return this.http.put(URL + "/submit-review/" + requestId, {}) as Observable<Request>;
+  submitReview(id: number): Observable<Request> {
+    return this.http.put(URL + "/submit-review/" + id, {}) as Observable<Request>;
   }
 
   listReview(userId: number): Observable<Request[]> {
     return this.http.get(URL + "/list-review/" + userId) as Observable<Request[]>;
+  }
+
+  approve(requestId: number): Observable<Request> {
+    return this.http.put(URL + "/approve/" + requestId, {}) as Observable<Request>;
+  }
+
+  reject(request: Request): Observable<Request> {
+    return this.http.put(URL + "/reject/" + request.id, request) as Observable<Request>;
   }
 
 }

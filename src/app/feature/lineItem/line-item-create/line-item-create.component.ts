@@ -7,6 +7,8 @@ import { LineItemService } from '../../../service/line-item.service';
 import { ProductService } from '../../../service/product.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SystemService } from '../../../service/system.service';
+import { RequestService } from '../../../service/request.service';
+import { Request } from '../../../model/request';
 
 @Component({
   selector: 'app-line-item-create',
@@ -19,18 +21,18 @@ export class LineItemCreateComponent implements OnInit, OnDestroy {
   newLineItem: LineItem = new LineItem();
   subscription!: Subscription;
   requestId: number = 0;
+  request!: Request;
   products: Product[] = [];
   lineItems!: LineItem[];
-
-
 
   welcomeName: string = "";
 
   constructor(
     private lineItemSvc: LineItemService,
     private productSvc: ProductService,
-    private router: Router,
     private sysSvc: SystemService,
+    private requestSvc: RequestService,
+    private router: Router,
     private actRoute: ActivatedRoute
   ) { }
 
@@ -42,7 +44,14 @@ export class LineItemCreateComponent implements OnInit, OnDestroy {
     // Make sure requestId is set here
     this.newLineItem.requestId = this.requestId;
 
-
+    this.subscription = this.requestSvc.getById(this.requestId).subscribe({
+      next: (resp) => {
+        this.newLineItem.request = resp;
+      },
+      error: (err) => {
+        console.error("Error getting request: ", err);
+      }
+    });
 
     // Load products for selection
     this.subscription = this.productSvc.list().subscribe({
@@ -63,16 +72,36 @@ export class LineItemCreateComponent implements OnInit, OnDestroy {
 
     this.subscription = this.lineItemSvc.add(this.newLineItem).subscribe({
       next: (resp) => {
-        console.log("Line Item added: ", resp);
+        console.log("Line item added: ", resp);
+        this.newLineItem = resp;
 
-        // this.router.navigateByUrl("/lines-for-req/:requestId");
-        this.router.navigateByUrl('/lines-for-req/' + this.newLineItem.requestId);
+        // get lineItems for the request
+        this.subscription = this.lineItemSvc.getByReqId(this.requestId).subscribe({
+          next: (resp) => {
+            console.log("Line items response:", resp);
+            this.lineItems = resp;
+          },
+          error: (err) => {
+            console.error("Request-LineItems: Error getting lineItems for requestId: ", err + this.requestId)
+          }
+        });
+        // get the request for requestId
+        this.subscription = this.requestSvc.getById(this.requestId).subscribe({
+          next: (resp) => {
+            console.log("Request response:", resp);
+            this.request = resp;
+          },
+          error: (err) => {
+            console.error("Request-LineItems: Error getting request for id: ", err + this.requestId);
+          }
+        });
 
       },
       error: (err) => {
-        console.error("Error adding line item:", err);
+        console.log("Erro adding line item: ", err);
       }
     });
+
   }
 
   ngOnDestroy(): void {

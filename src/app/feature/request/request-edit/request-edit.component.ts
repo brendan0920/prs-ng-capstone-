@@ -19,13 +19,11 @@ export class RequestEditComponent implements OnInit, OnDestroy {
   request: Request = new Request();
   subscription!: Subscription;
   users: User[] = [];
-  // userlogin!: UserLogin;
   deliveryModes: string[] = ["Pickup", "Via Mail"];
   welcomeName: string = "";
 
   constructor(
     private requestSvc: RequestService,
-    private userSvc: UserService,
     private router: Router,
     private sysSvc: SystemService,
     private actRoute: ActivatedRoute
@@ -70,8 +68,6 @@ export class RequestEditComponent implements OnInit, OnDestroy {
       }
     });
   }
-
-
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

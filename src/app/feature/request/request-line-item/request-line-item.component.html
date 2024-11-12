@@ -20,10 +20,10 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>{{ welcomeName}}</td>
+                    <td>{{ request.user.firstName + " " + request.user.lastName}}</td>
                     <td>{{ request.description}}</td>
                     <td>{{ request.status}}</td>
-                    <td>{{ request.total | currency}}</td>
+                    <td>{{ request.total| currency}}</td>
                 </tr>
             </tbody>
         </table>
@@ -69,8 +69,8 @@
                 </tr>
             </tbody>
         </table>
-        <a routerLink="/request-list">
-            <button (click)="submitReview()" class="btn btn-sm btn-primary">Submit</button>
+        <a routerLink="/lines-for-req/{{ requestId }}">
+            <button (click)="submitReview(requestId)" class="btn btn-sm btn-primary">Submit</button>
         </a>
     </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { LineItem } from '../../../model/line-item';
 import { Subscription } from 'rxjs';
@@ -39,16 +39,18 @@ export class RequestLineItemComponent implements OnInit, OnDestroy {
       next: (parms) => {
         this.requestId = parms['requestId'];
 
-        this.getRequestDetail();
+        this.getForRequestId();
       }
     });
+
   }
 
   delete(id: number): void {
     this.subscription = this.lineItemSvc.delete(id).subscribe({
       next: () => {
-        // only after receiving successful response, refresh the list.
-        this.getRequestDetail();
+        // refresh the list.
+        this.getForRequestId();
+
       },
       error: (err) => {
         console.error('Error deleting lineItem for id:' + id);
@@ -57,7 +59,20 @@ export class RequestLineItemComponent implements OnInit, OnDestroy {
     });
   }
 
-  getRequestDetail(): void {
+  submitReview(id: number): void {
+    this.subscription = this.requestSvc.submitReview(id).subscribe({
+      next: (resp) => {
+        console.log("Review submmited!", resp);
+
+        this.getForRequestId();
+      },
+      error: (err) => {
+        console.error("Error submitting review:", err);
+      }
+    });
+  }
+
+  getForRequestId(): void {
     // get the request for requestId
     this.subscription = this.requestSvc.getById(this.requestId).subscribe({
       next: (resp) => {
@@ -84,21 +99,6 @@ export class RequestLineItemComponent implements OnInit, OnDestroy {
   calcLineTotal(lineItem: LineItem): number {
     return lineItem.product.price * lineItem.quantity;
   }
-
-  submitReview(): void {
-    this.subscription = this.requestSvc.submitReview(this.requestId).subscribe({
-      next: (resp) => {
-        console.log("Review submmited!", resp);
-        this.getRequestDetail();
-        this.router.navigateByUrl("request-list");
-      },
-      error: (err) => {
-        console.error("Error submitting review:", err);
-      }
-    });
-
-  }
-
 
   ngOnDestroy(): void {
     this.subscription?.unsubscribe();

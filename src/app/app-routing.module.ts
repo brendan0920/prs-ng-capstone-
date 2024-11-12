@@ -26,7 +26,7 @@ import { RequestReviewComponent } from './feature/request/request-review/request
 import { RequestApproveRejectComponent } from './feature/request/request-approve-reject/request-approve-reject.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/user-list', pathMatch: 'full' },
+  { path: '', redirectTo: '/user-login', pathMatch: 'full' },
   { path: 'user-list', component: UserListComponent },
   { path: 'user-create', component: UserCreateComponent },
   { path: 'user-detail/:id', component: UserDetailComponent },
@@ -44,7 +44,7 @@ const routes: Routes = [
   { path: 'request-detail/:id', component: RequestDetailComponent },
   { path: 'request-edit/:id', component: RequestEditComponent },
   { path: 'list-review/:userId', component: RequestReviewComponent },
-  { path: 'request-approve-reject', component: RequestApproveRejectComponent },
+  { path: 'request-approve-reject/:requestId', component: RequestApproveRejectComponent },
   { path: 'lines-for-req/:requestId', component: RequestLineItemComponent },
   { path: 'lineItem-list', component: LineItemListComponent },
   { path: 'lineItem-create/:requestId', component: LineItemCreateComponent },
