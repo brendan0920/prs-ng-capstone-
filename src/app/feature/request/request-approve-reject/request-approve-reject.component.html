@@ -49,16 +49,12 @@
         </table>
     </div>
     <section>
-        <a routerLink="/request-list">
-            <button (click)="approve()" class="btn btn-sm btn-primary">Approve</button>
-        </a>
+        <button (click)="approve()" class="btn btn-sm btn-primary">Approve</button>
         <div>
             <label for="reasonForReject">Reason for rejection:</label>
             <textarea id="reasonForReject" [(ngModel)]="reasonForReject" class="form-control"
                 style="width: 200px; height: 40px;"></textarea>
         </div>
-        <a routerLink="/request-list">
-            <button (click)="reject()" class="btn btn-sm btn-danger">Reject</button>
-        </a>
+        <button (click)="reject()" class="btn btn-sm btn-danger">Reject</button>
     </section>
 </div>

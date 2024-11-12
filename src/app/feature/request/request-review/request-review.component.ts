@@ -1,9 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Router, ActivatedRoute } from '@angular/router';
 import { RequestService } from '../../../service/request.service';
 import { SystemService } from '../../../service/system.service';
 import { Request } from '../../../model/request';
+import { LineItemService } from '../../../service/line-item.service';
+import { LineItem } from '../../../model/line-item';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -14,8 +16,12 @@ import { Request } from '../../../model/request';
 export class RequestReviewComponent implements OnInit, OnDestroy {
   title: string = "Request-Review";
 
+  newLineItem: LineItem = new LineItem();
+  lineItems!: LineItem[];
   newRequest: Request = new Request();
   requests!: Request[];
+  request!: Request;
+  requestId!: number;
   subscription!: Subscription;
   userId!: number;
 
@@ -23,7 +29,9 @@ export class RequestReviewComponent implements OnInit, OnDestroy {
 
   constructor(
     private requestSvc: RequestService,
+
     private sysSvc: SystemService,
+    private actRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -32,9 +40,15 @@ export class RequestReviewComponent implements OnInit, OnDestroy {
     this.userId = this.sysSvc.loggedInUser.id;
     //this.newRequest.userId = this.newRequest.user.id;
 
+    // // Retrieve requestId from the route and set it on newLineItem
+    // this.requestId = Number(this.actRoute.snapshot.paramMap.get('requestId'));
+    // // set requestId 
+    // this.newLineItem.requestId = this.requestId;
+
     this.subscription = this.requestSvc.listReview(this.userId).subscribe({
       next: (resp) => {
         this.requests = resp;
+
       },
       error: (err) => {
         console.error("Error getting requests:", err);

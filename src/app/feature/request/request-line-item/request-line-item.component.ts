@@ -1,10 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-
 import { LineItem } from '../../../model/line-item';
 import { Subscription } from 'rxjs';
 import { RequestService } from '../../../service/request.service';
 import { LineItemService } from '../../../service/line-item.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Request } from '../../../model/request';
 import { SystemService } from '../../../service/system.service';
 
@@ -26,7 +25,6 @@ export class RequestLineItemComponent implements OnInit, OnDestroy {
   constructor(
     private requestSvc: RequestService,
     private lineItemSvc: LineItemService,
-    private router: Router,
     private sysSvc: SystemService,
     private actRoute: ActivatedRoute
   ) { }
@@ -38,8 +36,8 @@ export class RequestLineItemComponent implements OnInit, OnDestroy {
     this.subscription = this.actRoute.params.subscribe({
       next: (parms) => {
         this.requestId = parms['requestId'];
-
         this.getForRequestId();
+
       }
     });
 
@@ -53,9 +51,8 @@ export class RequestLineItemComponent implements OnInit, OnDestroy {
 
       },
       error: (err) => {
-        console.error('Error deleting lineItem for id:' + id);
-        console.error(err);
-      },
+        console.error('Error deleting lineItem for id:' + id, err);
+      }
     });
   }
 
@@ -74,9 +71,11 @@ export class RequestLineItemComponent implements OnInit, OnDestroy {
 
   getForRequestId(): void {
     // get the request for requestId
+    // this.request = new Request();
+
     this.subscription = this.requestSvc.getById(this.requestId).subscribe({
       next: (resp) => {
-        console.log("Request response:", resp);
+        console.log("Refresh Request:", resp);
         this.request = resp;
       },
       error: (err) => {
@@ -84,7 +83,7 @@ export class RequestLineItemComponent implements OnInit, OnDestroy {
       }
     });
 
-    // get lineItems for the request
+    // get lineItems for the requestId
     this.subscription = this.lineItemSvc.getByReqId(this.requestId).subscribe({
       next: (resp) => {
         console.log("Line items response:", resp);

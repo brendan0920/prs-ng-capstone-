@@ -96,6 +96,9 @@ export class LineItemEditComponent implements OnInit, OnDestroy {
             console.error("Request-LineItems: Error getting request for id: ", err + this.requestId);
           }
         });
+
+        this.router.navigateByUrl("/lines-for-req/" + this.newLineItem.requestId);
+        // "/lines-for-req/{{ newLineItem.requestId }}"
       },
       error: (err) => {
         console.log("Erro adding line item: ", err);
